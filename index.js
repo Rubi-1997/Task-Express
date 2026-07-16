@@ -7,7 +7,7 @@ app.use(express.json());
 app.get("/todos", (req, res) => {
   res.status(200).json({
     suuccess: true,
-    data: todo,
+    data: todo
   });
 });
 app.get("/todos/:id", (req, res) => {
@@ -51,6 +51,7 @@ app.post("/todos", (req, res) => {
 app.put("/todos/:id", (req, res) => {
   const { id } = req.params;
   const { data } = req.body;
+  /* slice use for id change  :1  into 1*/
   let num = id.slice(1);
   let num2 = Number(num);
   console.log(data);
@@ -62,7 +63,7 @@ app.put("/todos/:id", (req, res) => {
     });
   }
 
-  const updateTodo = todo.map((ele) => {
+   todo = todo.map((ele) => {
     if (ele.id === num2) {
       return { ...ele, ...data };
     }
@@ -71,7 +72,7 @@ app.put("/todos/:id", (req, res) => {
   });
   res.status(200).json({
     success: true,
-    data: updateTodo,
+    data: todo
     // message:"updated user successfully"
   });
 });
